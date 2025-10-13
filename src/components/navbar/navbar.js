@@ -1,4 +1,4 @@
-import { Person } from 'react-bootstrap-icons';
+import { Person, Search } from 'react-bootstrap-icons';
 import './navbar.css';
 export const Navbar = () => {
   return (
@@ -8,6 +8,18 @@ export const Navbar = () => {
           TravelO
         </a>
       </h1>
+      <div className='form-container d-flex align-items-center shadow'>
+        <span className='form-option'>Any Where</span>
+        <span className='border-right-1px'></span>
+
+        <span className='form-option'>Any Week</span>
+        <span className='border-right-1px'></span>
+
+        <span className='form-option'>Any Guest</span>
+        <span className='search'>
+          <Search size={18} className='search-btn' />
+        </span>
+      </div>
       <nav className='nav'>
         <div className='nav-con'>
           <span className='material-symbols-outlined profile-option menu cursor-pointer'>

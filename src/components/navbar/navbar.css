@@ -7,6 +7,7 @@
   z-index: 2;
   width: 100%;
   padding:8px 3rem;
+  top:0;
 }
 .heading-title{
     font-size: 30px;
@@ -16,6 +17,9 @@
 .nav-con{
     display: flex;
     align-items: center;
+    border:0.5px solid black;
+    border-radius:4px;
+    overflow: hidden;
 }
 .nav-con:hover{
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.1);
@@ -27,6 +31,7 @@ background-color: var(--accent-color);
 .menu{
     font-size: 36px;
     padding:4px;
+    background-color: #fff;
     border-right: 1px solid var(--container-border-color)
 }
 .person{
@@ -35,4 +40,29 @@ background-color: var(--accent-color);
 }
 .cursor-pointer:hover{
 cursor:pointer;
+}
+.form-container{
+    justify-content: center;
+    padding:3px;
+}
+.form-option{
+    font-size: 14px;
+    padding:8px;
+    color:grey;
+}
+.border-right-1px{
+    border-right:1px solid var(--accent-color)
+}
+.search-btn{
+     height:100%;
+    color:white;
+    
+}
+.search{
+    margin:-2.5px;
+    width:45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
 }
