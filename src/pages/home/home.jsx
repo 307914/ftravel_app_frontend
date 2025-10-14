@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 import { END_POINTS, REQUEST_TYPES } from '../../axiosInstance';
-import { CategoryCard, Hotel, Navbar } from '../../components';
+import { CategoryCard, Hotel, Navbar, SearchStayWithDate } from '../../components';
 import InfiniteScroll from 'react-infinite-scroll-component'
 import UseApi from '../../useApi';
 
 
 import './hone.css'
 import axios from 'axios';
-import { useCategory } from '../../context';
+import { useCategory, useDate } from '../../context';
 export const Home = () => {
   const [hasShowMore, setHasShowMore] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(16);
   const [testData, setTestData] = useState([]);
   const [hotels, setHotels] = useState([]);
-  const { state, setState } = useCategory();
+  const { state, setState, single, setSingle } = useCategory();
+  const { ismodalopen } = useDate();
 
   useEffect(() => {
     (async () => {
@@ -43,7 +44,7 @@ export const Home = () => {
     }, 1000)
   }
   return (
-    <>
+    <div className='relative'>
       <Navbar />
       <CategoryCard />
       {hotels && hotels.length > 0 ? (
@@ -59,6 +60,7 @@ export const Home = () => {
           </main>
 
         </InfiniteScroll>) : (<></>)}
-    </>
+      {ismodalopen && <SearchStayWithDate />}
+    </div>
   );
 };

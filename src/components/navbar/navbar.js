@@ -1,25 +1,55 @@
 import { Person, Search } from 'react-bootstrap-icons';
 import './navbar.css';
+import { useCategory, useDate } from '../../context';
+import { Link } from 'react-router';
 export const Navbar = () => {
+  const { single, setSingle } = useCategory();
+  const {
+    ismodalopen,
+    checkInDate,
+    date,
+    checkOutDate,
+    destination,
+    datedispatch,
+  } = useDate();
+
+  const handlesearch = () => {
+    datedispatch({ type: 'IS_SEARCH_MODAL' });
+  };
   return (
     <header className='heading d-flex gap-bolder align-center'>
       <h1 className='heading-title'>
-        <a className='link' href='/'>
+        <Link className='travel' to='/'>
           TravelO
-        </a>
+        </Link>
       </h1>
-      <div className='form-container d-flex align-items-center shadow'>
-        <span className='form-option'>Any Where</span>
-        <span className='border-right-1px'></span>
 
-        <span className='form-option'>Any Week</span>
+      <div
+        className='form-container d-flex align-items-center shadow'
+        onClick={handlesearch}
+      >
+        <span className='form-option'>{destination || 'Any Where'}</span>
         <span className='border-right-1px'></span>
-
-        <span className='form-option'>Any Guest</span>
+        <span className='form-option'>
+          {checkInDate && checkOutDate
+            ? `${checkInDate.toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'short',
+              })} -${checkOutDate.toLocaleDateString('en-US', {
+                day: 'numeric',
+                month: 'short',
+              })}`
+            : 'Any week'}
+        </span>
+        <span className='border-right-1px'></span>
+        <span className='form-option'>
+          {date && date > 0 ? `${date} guests` : `Add guests`}
+        </span>
         <span className='search'>
           <Search size={18} className='search-btn' />
         </span>
       </div>
+
       <nav className='nav'>
         <div className='nav-con'>
           <span className='material-symbols-outlined profile-option menu cursor-pointer'>
