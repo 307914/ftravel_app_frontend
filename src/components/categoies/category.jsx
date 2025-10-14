@@ -15,7 +15,7 @@ export const CategoryCard = () => {
                 const { data } = await axios.post("http://localhost:3500/api/categoryadd");
                 const showData = data.slice(
                     pages + 10 > data.length ? data.length - 10 : pages,
-                    pages + 10
+                    pages + 10 
                 );
                 setCategories(showData);
             } catch (error) {
