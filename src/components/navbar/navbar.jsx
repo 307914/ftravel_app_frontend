@@ -1,6 +1,6 @@
 import { Person, Search } from 'react-bootstrap-icons';
 import './navbar.css';
-import { useCategory, useDate } from '../../context';
+import { useAuth, useCategory, useDate } from '../../context';
 import { Link } from 'react-router';
 export const Navbar = () => {
   const { single, setSingle } = useCategory();
@@ -13,9 +13,17 @@ export const Navbar = () => {
     datedispatch,
   } = useDate();
 
+  const { isAuthOpen, authDispatch } = useAuth();
+
   const handlesearch = () => {
     datedispatch({ type: 'IS_SEARCH_MODAL' });
   };
+
+  const handleauth = () => {
+    authDispatch({
+      type: "IS_AUTHOPEN"
+    })
+  }
   return (
     <header className='heading d-flex gap-bolder align-center'>
       <h1 className='heading-title'>
@@ -33,12 +41,12 @@ export const Navbar = () => {
         <span className='form-option'>
           {checkInDate && checkOutDate
             ? `${checkInDate.toLocaleDateString('en-US', {
-                day: 'numeric',
-                month: 'short',
-              })} -${checkOutDate.toLocaleDateString('en-US', {
-                day: 'numeric',
-                month: 'short',
-              })}`
+              day: 'numeric',
+              month: 'short',
+            })} -${checkOutDate.toLocaleDateString('en-US', {
+              day: 'numeric',
+              month: 'short',
+            })}`
             : 'Any week'}
         </span>
         <span className='border-right-1px'></span>
@@ -50,7 +58,7 @@ export const Navbar = () => {
         </span>
       </div>
 
-      <nav className='nav'>
+      <nav className='nav' onClick={handleauth}>
         <div className='nav-con'>
           <span className='material-symbols-outlined profile-option menu cursor-pointer'>
             menu
