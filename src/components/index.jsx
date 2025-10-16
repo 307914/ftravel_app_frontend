@@ -9,3 +9,5 @@ export { DateSelector } from './dateselector/dateselector'
 
 export { HotelImages } from './hotelImages/hotelimages'
 export { HotelDetails } from './HotelDetails/hoteldetails'
+
+export { AuthModal } from './authModal/authModal'
