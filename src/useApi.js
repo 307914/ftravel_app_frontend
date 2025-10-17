@@ -9,14 +9,18 @@ export const useApi = (url, type = 'get') => {
     setMessage,
     isLoading,
     setIsLoading,
+    success,
+    setSuccess,
   } = useUserdata();
   const makeRequest = async (payload) => {
     try {
       setIsLoading(true);
       const { data } = await axiosInstance[type](url, payload);
       if (data) {
-        const { newdata } = data;
-        console.log({ newdata });
+        const { newdata, success, message } = data;
+        console.log({ message, success, newdata });
+        setMessage(message);
+        setSuccess(success);
         setUserData(newdata);
         setIsLoading(false);
       } else {

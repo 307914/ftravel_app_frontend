@@ -41,7 +41,11 @@ gap:5px;
 }
 .view{
     font-size: 12px;
+    opacity:0.7;
 
+}
+.night{
+    opacity:0.7;
 }
 .selected{
     color:red;

@@ -10,6 +10,9 @@ import { useEffect } from 'react';
 import { axiosInstance, END_POINTS } from './axiosInstance';
 import { useApi } from './useApi';
 import ProtectedComponent from './propected';
+import { Payment } from './payment/payment';
+import { OrderSummary } from './pages/ordersummary/ordersummary';
+import Toast from './toast';
 
 function App() {
   const { makeRequest } = useApi(END_POINTS.USER.LOGINVIACOOKIE);
@@ -17,19 +20,24 @@ function App() {
     makeRequest();
   }, []);
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route
-        path='/hotels/:name/:category/:id/reserve'
-        element={<SingleHotel />}
-      ></Route>
-      <Route path='/hotels/:destination' element={<SearchResult />}></Route>
-      <Route path='/filter' element={<Filter />} />
-      <Route path='/login' element={<AuthModal />}></Route>
-      <Route path='/protected' element={<ProtectedComponent />}>
-        <Route path='wishlist' element={<Wishlist />}></Route>
-      </Route>
-    </Routes>
+    <>
+      <Toast />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route
+          path='/hotels/:name/:category/:id/reserve'
+          element={<SingleHotel />}
+        ></Route>
+        <Route path='/hotels/:destination' element={<SearchResult />}></Route>
+        <Route path='/filter' element={<Filter />} />
+        <Route path='/login' element={<AuthModal />}></Route>
+        <Route path='/protected' element={<ProtectedComponent />}>
+          <Route path='wishlist' element={<Wishlist />}></Route>
+        </Route>
+        <Route path='/payment/:id' element={<Payment />}></Route>
+        <Route path='/order-summary/:id' element={<OrderSummary />}></Route>
+      </Routes>
+    </>
   );
 }
 

@@ -37,6 +37,26 @@ export const DateReducer = (state, action) => {
             return {
                 ...state, ismodalopen: !state.ismodalopen
             }
+        case 'CLEAR_DATES':
+            return {
+                ...state,
+                checkInDate: null,
+                checkOutDate: null,
+                date: 0
+            }
+
+        case "ORDER":
+            return {
+                ...state,
+                order: true
+            }
+
+        case "ORDER_CLEAR":
+            return {
+                ...state,
+                order: false
+
+            }
         default:
             return state;
     }
