@@ -17,32 +17,24 @@ export const Hotel = ({ hotel }) => {
     const { name, _id, address, state, rating, category } = hotel
     const isPresent = userdata?.wishlist?.find((prod) => prod._id === _id);
 
-    useEffect(() => {
-        if (!userdata) {
-            navigate('/login');
-        }
-    }, [userdata])
 
     const handlehotelcard = () => {
         navigate(`/hotels/${name}/${category}/${_id}/reserve`)
     }
-    // useEffect(()=>{
-    //     if(order){
-    //   datedispatch({
-    //     type:"ORDER_CLEAR"
-    //   })
-    // }
-    // },[order])
-
     const handleheart = async () => {
-        isPresentItem = userdata?.wishlist?.some((prod) => prod._id === _id);
-        if (isPresentItem) {
-            await makerequestRemove(hotel);
-            setIsOpenWishlist(false);
+        if (userdata) {
+            isPresentItem = userdata?.wishlist?.some((prod) => prod._id === _id);
+            if (isPresentItem) {
+                await makerequestRemove(hotel);
+                setIsOpenWishlist(false);
+            }
+            else {
+                await makeRequest(hotel);
+                setIsOpenWishlist(true);
+            }
         }
         else {
-            await makeRequest(hotel);
-            setIsOpenWishlist(true);
+            navigate('/login');
         }
     }
     return (
