@@ -54,7 +54,6 @@ export const Home = () => {
   const propertyTypedata = PropertyTypeData(hotelsBedsAndRooms, propertytype);
   const ratingFiltereddata = RatingUtils(propertyTypedata, ratingNumber)
   const cancelfiltereddata = CancelFiltered(ratingFiltereddata, iscancelable);
-  console.log({ ratingFiltereddata });
   return (
     <div className='relative'>
       <Navbar />

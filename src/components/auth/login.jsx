@@ -1,13 +1,25 @@
-import { useAuth } from '../../context'
+import { useNavigate } from 'react-router'
+import { useAuth, useUserdata } from '../../context'
 import { loginHandler } from '../../services/login-service'
 import { numberregex, passwordregex } from '../../utils'
 import './auth.css'
+import { useEffect } from 'react'
+import { useApi } from '../../useApi'
+import { END_POINTS, REQUEST_TYPES } from '../../axiosInstance'
 
 let ispasswordvalid,
     isnumbervalid
 export const Login = () => {
+    const { makeRequest } = useApi(END_POINTS.USER.LOGIN, REQUEST_TYPES.POST);
     const { number, username, name, authToken, email, password, authDispatch } = useAuth()
+    const navigate = useNavigate();
+    const { userdata } = useUserdata();
 
+    useEffect(() => {
+        if (userdata) {
+            navigate('/');
+        }
+    }, [userdata])
     const handlenumber = (e) => {
         isnumbervalid = numberregex(e.target.value);
         if (isnumbervalid) {
@@ -37,29 +49,26 @@ export const Login = () => {
     const handlesubmitlogin = async (e) => {
         e.preventDefault();
         if (isnumbervalid && ispasswordvalid) {
-            console.log("this is valid");
-            const data = await loginHandler(number, password);
-            const { username, token } = data;
+            const payload = { number, password };
+            console.log({ payload });
+            await makeRequest(payload);
             authDispatch({
                 type: "NAME",
                 payload: username
             })
 
-            authDispatch({
-                type: "TOKEN",
-                payload: token
-            })
+            // authDispatch({
+            //     type: "TOKEN",
+            //     payload: token
+            // })
             authDispatch({
                 type: "STATE_LOGIN"
             })
+            authDispatch({
+                type: "IS_AUTHOPEN"
+            })
         }
-        authDispatch({
-            type: "IS_AUTHOPEN"
-        })
-
     }
-    console.log({ authToken, name });
-
     return (
         <div className='auth-modal-container d-flex align-center'>
             <form onSubmit={handlesubmitlogin}>

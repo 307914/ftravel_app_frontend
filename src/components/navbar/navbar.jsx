@@ -1,9 +1,12 @@
-import { Person, Search } from 'react-bootstrap-icons';
+import { BoxArrowRight, Cart, Person, Search } from 'react-bootstrap-icons';
 import './navbar.css';
 import { useAuth, useCategory, useDate } from '../../context';
-import { Link } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
+import { useApi } from '../../useApi';
+import { END_POINTS, REQUEST_TYPES } from '../../axiosInstance';
 export const Navbar = () => {
   const { single, setSingle } = useCategory();
+  const { makeRequest } = useApi(END_POINTS.USER.LOGOUT, REQUEST_TYPES.POST);
   const {
     ismodalopen,
     checkInDate,
@@ -12,6 +15,7 @@ export const Navbar = () => {
     destination,
     datedispatch,
   } = useDate();
+  const navigate = useNavigate();
 
   const { isAuthOpen, authDispatch } = useAuth();
 
@@ -24,6 +28,12 @@ export const Navbar = () => {
       type: "IS_AUTHOPEN"
     })
   }
+  const handlelogout = () => {
+    makeRequest();
+  }
+  const handlewishlist = () => {
+    navigate('/protected/wishlist');
+  }
   return (
     <header className='heading d-flex gap-bolder align-center'>
       <h1 className='heading-title'>
@@ -33,7 +43,7 @@ export const Navbar = () => {
       </h1>
 
       <div
-        className='form-container d-flex align-items-center shadow'
+        className='form-container search-location-container d-flex align-items-center shadow'
         onClick={handlesearch}
       >
         <span className='form-option'>{destination || 'Any Where'}</span>
@@ -57,15 +67,24 @@ export const Navbar = () => {
           <Search size={18} className='search-btn' />
         </span>
       </div>
-
-      <nav className='nav' onClick={handleauth}>
-        <div className='nav-con'>
-          <span className='material-symbols-outlined profile-option menu cursor-pointer'>
-            menu
-          </span>
-          <Person className='profile-option person cursor-point'></Person>
+      <div className='wishlist-logout-container'>
+        <div onClick={handlewishlist}>
+          <Cart size={25} />
         </div>
-      </nav>
+
+        <button style={{ border: "none" }} className="travel-logout-container" onClick={handlelogout}>
+          <BoxArrowRight size={25} />
+        </button>
+
+        <nav className='nav' onClick={handleauth}>
+          <div className='nav-con'>
+            <span className='material-symbols-outlined profile-option menu cursor-pointer'>
+              menu
+            </span>
+            <Person className='profile-option person cursor-point'></Person>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };

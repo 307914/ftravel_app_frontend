@@ -1,8 +1,10 @@
 import { X } from "react-bootstrap-icons"
 import './authmodal.css'
 import { Login } from "../auth/login"
-import { useAuth } from "../../context"
+import { useAuth, useUserdata } from "../../context"
 import { Signup } from "../auth/signup"
+import { useEffect } from "react"
+import { useNavigate } from "react-router"
 export const AuthModal = () => {
     const { openform, authDispatch } = useAuth();
 

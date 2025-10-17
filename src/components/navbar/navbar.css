@@ -69,3 +69,15 @@ cursor:pointer;
     justify-content: center;
     background-color: var(--primary-color);
 }
+.wishlist-logout-container{
+    margin-left:auto;
+    display: flex;
+    align-items: center;
+    gap:30px;
+}
+.search-location-container{
+    margin-left:auto;
+}
+.travel-logout-container{
+    background-color: white;
+}

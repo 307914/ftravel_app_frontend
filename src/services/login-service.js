@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { axiosInstance } from '../axiosInstance';
 
 export const loginHandler = async (number, password) => {
   try {
@@ -7,7 +8,7 @@ export const loginHandler = async (number, password) => {
         data: { username },
         token,
       },
-    } = await axios.post('http://localhost:3500/user/login', {
+    } = await axiosInstance.post('/user/login', {
       number: number,
       password: password,
     });

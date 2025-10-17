@@ -43,6 +43,9 @@ gap:5px;
     font-size: 12px;
 
 }
+.selected{
+    color:red;
+}
 .rs{
     font-weight: 700;
     font-size: 20px;

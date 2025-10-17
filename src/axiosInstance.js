@@ -8,6 +8,15 @@ export const END_POINTS = {
   HOTELS: {
     GETHOTELS: '/api/gethotels',
   },
+  WISHLIST: {
+    ADDTOWISHLIST: '/user/addtowishlist',
+    REMOVEFROMWISHLIST: '/user/removefromwishlist',
+  },
+  USER: {
+    LOGIN: '/user/login',
+    LOGINVIACOOKIE: '/user/login',
+    LOGOUT: '/user/logout',
+  },
 };
 
 export const REQUEST_TYPES = {

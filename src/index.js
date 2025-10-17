@@ -5,6 +5,7 @@ import {
   ContextProvider,
   DateContetProvider,
   FilterContextProvider,
+  UserContextProvider,
 } from './context';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Navbar } from './components';
@@ -17,7 +18,9 @@ root.render(
         <DateContetProvider>
           <FilterContextProvider>
             <AuthContextProvider>
-              <App />
+              <UserContextProvider>
+                <App />
+              </UserContextProvider>
             </AuthContextProvider>
           </FilterContextProvider>
         </DateContetProvider>
