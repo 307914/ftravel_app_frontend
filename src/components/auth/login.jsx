@@ -19,6 +19,7 @@ export const Login = () => {
         if (userdata) {
             navigate('/');
         }
+
     }, [userdata])
     const handlenumber = (e) => {
         isnumbervalid = numberregex(e.target.value);
@@ -52,23 +53,24 @@ export const Login = () => {
             const payload = { number, password };
             console.log({ payload });
             await makeRequest(payload);
-            authDispatch({
-                type: "NAME",
-                payload: username
-            })
-
-            // authDispatch({
-            //     type: "TOKEN",
-            //     payload: token
-            // })
-            authDispatch({
-                type: "STATE_LOGIN"
-            })
-            authDispatch({
-                type: "IS_AUTHOPEN"
-            })
         }
+        authDispatch({
+            type: "STATE_LOGIN"
+        })
+        authDispatch({
+            type: "IS_AUTHOPOEN"
+        })
     }
+    // const handleviatextcrediantials = async () => {
+    //     const payload = { number: 7878787878, password: "Abhi@1234" };
+    //     await makeRequest(payload)
+    //     authDispatch({
+    //         type: "STATE_LOGIN"
+    //     })
+    //     authDispatch({
+    //         type: "IS_AUTHOPOEN"
+    //     })
+    // }
     return (
         <div className='auth-modal-container d-flex align-center'>
             <form onSubmit={handlesubmitlogin}>
@@ -99,9 +101,9 @@ export const Login = () => {
                     <button className="button btn-submit">
                         Login
                     </button>
-                    <button className="button btn-submit">
+                    {/* <button className="button btn-submit" onClick={handleviatextcrediantials}>
                         Login via Test Crediantials
-                    </button>
+                    </button> */}
                 </div>
             </form>
         </div>

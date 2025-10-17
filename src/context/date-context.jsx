@@ -7,15 +7,16 @@ export const intialState = {
     ismodalopen: false,
     destination: "",
     date: null,
-    issearchopen: true
+    issearchopen: true,
+    order: false
 }
 export const dateContext = createContext(intialState);
 
 
 const DateContetProvider = ({ children }) => {
     const [state, datedispatch] = useReducer(DateReducer, intialState);
-    const { issearchopen, checkInDate, date, destination, checkOutDate, ismodalopen } = state;
-    return <dateContext.Provider value={{ issearchopen, date, destination, checkInDate, checkOutDate, ismodalopen, datedispatch }}>{children}</dateContext.Provider>
+    const { issearchopen, order, checkInDate, date, destination, checkOutDate, ismodalopen } = state;
+    return <dateContext.Provider value={{ order, issearchopen, date, destination, checkInDate, checkOutDate, ismodalopen, datedispatch }}>{children}</dateContext.Provider>
 }
 
 const useDate = () => useContext(dateContext);

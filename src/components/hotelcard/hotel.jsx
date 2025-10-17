@@ -1,7 +1,7 @@
-import { HeartFill, StarFill } from 'react-bootstrap-icons'
+import { BookmarkCheck, HeartFill, StarFill } from 'react-bootstrap-icons'
 import './hotel.css'
 import { useLocation, useNavigate, useParams } from 'react-router'
-import { useCategory, useUserdata } from '../../context';
+import { useCategory, useDate, useUserdata } from '../../context';
 import { useEffect } from 'react';
 import { useApi } from '../../useApi';
 import { END_POINTS, REQUEST_TYPES } from '../../axiosInstance';
@@ -10,6 +10,7 @@ export const Hotel = ({ hotel }) => {
     const { makeRequest } = useApi(END_POINTS.WISHLIST.ADDTOWISHLIST, REQUEST_TYPES.POST);
     const { makeRequest: makerequestRemove } = useApi(END_POINTS.WISHLIST.REMOVEFROMWISHLIST, REQUEST_TYPES.POST);
     const navigate = useNavigate();
+    const { order, datedispatch } = useDate();
 
     const { userdata, isOpenWishlist, setIsOpenWishlist } = useUserdata();
     const { pathname } = useLocation()
@@ -25,6 +26,13 @@ export const Hotel = ({ hotel }) => {
     const handlehotelcard = () => {
         navigate(`/hotels/${name}/${category}/${_id}/reserve`)
     }
+    // useEffect(()=>{
+    //     if(order){
+    //   datedispatch({
+    //     type:"ORDER_CLEAR"
+    //   })
+    // }
+    // },[order])
 
     const handleheart = async () => {
         isPresentItem = userdata?.wishlist?.some((prod) => prod._id === _id);
@@ -48,7 +56,8 @@ export const Hotel = ({ hotel }) => {
                         <span className='rating'><StarFill /> <span>{rating}</span></span>
                     </span>
                     <p className='view'>{name}</p>
-                    <p className='rs'>Rs. {hotel?.price} <span>night</span></p>
+                    <p className='rs'>₹{hotel?.price} <span className="night">night</span></p>
+                    {order ? <span><BookmarkCheck size={20} /></span> : <></>}
                 </div>
             </div>
             <div className='absolute heart'>

@@ -3,19 +3,25 @@ import { Star, StarFill } from 'react-bootstrap-icons'
 import './price.css'
 import { useDate } from '../../context';
 import { DateSelector } from '../dateselector/dateselector';
+import { Navigate, useNavigate } from 'react-router';
 
 
 export const Price = ({ singleHotel }) => {
     const { price, rating, _id } = singleHotel;
     const { date, datedispatch } = useDate();
+    const navigate = useNavigate();
+
 
     const handledate = (event) => {
         datedispatch({ type: "DATE", payload: event.target.value });
     }
+    const handleprice = () => {
+        navigate(`/payment/${_id}`);
+    }
 
     return (
-        <div className="price-container d-flex direction-column shadow">
-            <div className="price-details-container d-flex">
+        <div className="price-container-single d-flex direction-column shadow">
+            <div className=" d-flex">
                 <p className='day-font d-flex  align-center'>
                     <span className="rupee">Rs. {price}</span> <span className='rating'>night</span>
                 </p>
@@ -24,11 +30,11 @@ export const Price = ({ singleHotel }) => {
             </div>
 
             <div className='loc-container d-flex'>
-                <div className='checkin'>
+                <div className='checkin '>
                     <label>Check In</label>
                     <DateSelector className="date-search" checkInType="in" />
                 </div>
-                <div className='checkout'>
+                <div className='checkout '>
                     <label>Check Out</label>
                     <DateSelector className="date-search" checkInType="out" />
                 </div>
@@ -39,7 +45,7 @@ export const Price = ({ singleHotel }) => {
                 {date <= 0 ? <input type="number" className="date-search" value={date} placeholder="addguests" onChange={handledate} /> : <span>{date} guests</span>}
             </div>
 
-            <button className='btn-reserve'>
+            <button className='btn-reserve' onClick={handleprice}>
                 Reserve
             </button>
             <div className='price-checkout'>

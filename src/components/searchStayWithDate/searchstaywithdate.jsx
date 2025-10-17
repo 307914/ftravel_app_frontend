@@ -71,12 +71,12 @@ export const SearchStayWithDate = () => {
                 </div>
 
                 <div className='location-con'>
-                    <label className='label'>Week</label>
+                    <label className='label'>checkIn</label>
                     <DateSelector checkInType="in" />
                 </div>
 
                 <div className='location-con'>
-                    <label className='label'>Guest</label>
+                    <label className='label'>checkOut</label>
                     <DateSelector checkInType="out" />
                 </div>
 
